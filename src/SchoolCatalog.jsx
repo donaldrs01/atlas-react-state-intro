@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { CourseContext } from "./CourseContext";
 
 // SchoolCatalog component
 export default function SchoolCatalog() {
   // State variables
+  const { enrolledCourses, enrollCourse, dropCourse } =
+    useContext(CourseContext);
   const [courses, setCourses] = useState([]);
   const [filter, setFilter] = useState("");
   const [sortField, setSortField] = useState("courseNumber");
@@ -109,7 +112,7 @@ export default function SchoolCatalog() {
               <td>{course.semesterCredits}</td>
               <td>{course.totalClockHours}</td>
               <td>
-                <button>Enroll</button>
+                <button onClick={() => enrollCourse(course)}>Enroll</button>
               </td>
             </tr>
           ))}
